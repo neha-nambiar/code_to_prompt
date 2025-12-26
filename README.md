@@ -1,5 +1,8 @@
 # code-to-prompt
 
+[![PyPI version](https://badge.fury.io/py/code-to-prompt-cli.svg)](https://badge.fury.io/py/code-to-prompt-cli)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+
 Pack an entire codebase into a single, clean, LLM-ready text prompt.
 
 `code-to-prompt` recursively reads a folder (typically a repository), filters out noise
@@ -15,13 +18,13 @@ No AI, no network calls — pure local filesystem processing.
 Using pipx (recommended for CLI tools):
 
 ```bash
-pipx install code-to-prompt
+pipx install code-to-prompt-cli
 ```
 
 Or with pip:
 
 ```bash
-pip install code-to-prompt
+pip install code-to-prompt-cli
 ```
 
 
