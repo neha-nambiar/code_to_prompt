@@ -55,10 +55,10 @@ def should_include_file(path: Path, skip: set[str] | None) -> bool:
     }
 
 
-def get_files(folder: Path, skip: set[str] | None) -> list[Path]:
+def get_files(folder: Path, skip: set[str] | None, skip_folders: set[str] | None) -> list[Path]:
     files = []
     for root, dirs, filenames in os.walk(folder):
-        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS and (not skip_folders or d not in skip_folders)]
         for name in sorted(filenames):
             path = Path(root) / name
             if should_include_file(path, skip):
@@ -66,15 +66,16 @@ def get_files(folder: Path, skip: set[str] | None) -> list[Path]:
     return files
 
 
-def folder_to_txt(folder_path: str, output: str | None, skip_files: list[str] | None):
+def folder_to_txt(folder_path: str, output: str | None, skip_files: list[str] | None, skip_folders: list[str] | None):
     folder = Path(folder_path)
     if not folder.is_dir():
         raise ValueError(f"Not a directory: {folder}")
 
     output = output or f"{folder.name}_output.txt"
     skip = set(skip_files) if skip_files else None
+    skip_dirs = set(skip_folders) if skip_folders else None
 
-    files = get_files(folder, skip)
+    files = get_files(folder, skip, skip_dirs)
     if not files:
         raise ValueError("No files found")
 
@@ -101,7 +102,8 @@ def main():
     )
     parser.add_argument("folder")
     parser.add_argument("output", nargs="?")
-    parser.add_argument("--skip", nargs="+")
+    parser.add_argument("--skip", nargs="+", help="Skip specific files by name")
+    parser.add_argument("--skip-folders", nargs="+", help="Skip specific folders by name")
     args = parser.parse_args()
 
-    folder_to_txt(args.folder, args.output, args.skip)
+    folder_to_txt(args.folder, args.output, args.skip, args.skip_folders)

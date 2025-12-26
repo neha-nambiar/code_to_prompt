@@ -33,13 +33,16 @@ pip install code-to-prompt-cli
 
 ```bash
 # Basic usage (outputs <folder_name>_output.txt)
-code_to_prompt ./my-project
+code-to-prompt ./my-project
 
 # Custom output file
-code_to_prompt ./my-project output.txt
+code-to-prompt ./my-project output.txt
 
 # Skip specific files by name
-code_to_prompt ./my-project --skip config.py secrets.json
+code-to-prompt ./my-project --skip config.py secrets.json
+
+# Skip specific folders by name
+code-to-prompt ./my-project --skip-folders tests docs
 ```
 
 The output file contains:
