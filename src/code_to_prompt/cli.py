@@ -67,7 +67,8 @@ def get_files(folder: Path, skip: set[str] | None, skip_folders: set[str] | None
 
 
 def folder_to_txt(folder_path: str, output: str | None, skip_files: list[str] | None, skip_folders: list[str] | None):
-    folder = Path(folder_path)
+    folder = Path(folder_path).resolve()
+    cwd = Path.cwd()
     if not folder.is_dir():
         raise ValueError(f"Not a directory: {folder}")
 
@@ -86,7 +87,12 @@ def folder_to_txt(folder_path: str, output: str | None, skip_files: list[str] | 
         except Exception:
             continue
 
-        lines.append(str(path.relative_to(folder)))
+        try:
+            rel_path = path.relative_to(cwd)
+        except ValueError:
+            rel_path = path.relative_to(folder)
+        
+        lines.append(str(rel_path))
         lines.append("```")
         lines.append(content.rstrip())
         lines.append("```")
