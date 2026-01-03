@@ -108,10 +108,17 @@ code-to-prompt --help                                       # show all options
 
 * Fenced code blocks optimized for LLM consumption.
 * File paths are resolved relative to the current working directory. This avoids leaking machine-specific paths into LLM prompts.
-* Never modifies your codebase: output is always written to a dedicated .code-to-prompt/ folder in the current working directory, never overwriting source files.
 * Auto-skips noise: binaries, build artifacts, `.git`, `node_modules`, `__pycache__`, etc.
 * Optional token count estimation for LLM context awareness (`--tokens`)
 * Deterministic ordering: files are sorted by normalized relative paths, guaranteeing stable and reproducible output across runs
+
+## Guarantees
+
+* Read-only operation — your codebase is never modified
+* Overwrite-safe — output is written only to a dedicated .code-to-prompt/ directory 
+* No accidental data loss — source files are never overwritten
+* Local-only execution — no network calls or AI usage
+* Path hygiene — machine-specific absolute paths are never leaked into prompts
 
 ## License
 
