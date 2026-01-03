@@ -5,7 +5,7 @@
 
 Turn a codebase into a single, clean, LLM-ready text prompt.
 
-`code-to-prompt` recursively walks a code folder, filters out noise (build artifacts, dependencies, binaries), and outputs a single text file with relative paths and fenced code blocks for direct copy-pasting into LLM chatbots like ChatGPT, Claude and Gemini.
+`code-to-prompt` recursively walks a code folder, filters out noise (build artifacts, dependencies, binaries), and outputs a single text file with relative file paths and fenced code blocks for direct copy-pasting into LLM chatbots like ChatGPT, Claude and Gemini.
 
 Local filesystem processing. No AI or network calls.
 
@@ -90,10 +90,10 @@ pip install code-to-prompt-cli
 ## Usage
 
 ```bash 
-code-to-prompt ./my-project                                 # outputs to .code-to-prompt/
+code-to-prompt ./my-project                                 # outputs to .code-to-prompt/ in the current directory
 code-to-prompt ./my-project -o output.txt                   # custom output filename
 code-to-prompt ./my-project -s tests -s src/__init__.py     # skip files or folders
-code-to-prompt ./my-project --tokens                        # estimate total output tokens
+code-to-prompt ./my-project --tokens                        # estimate total output tokens (no output file is written)
 code-to-prompt --help                                       # show all options
 ```
 
@@ -106,12 +106,12 @@ code-to-prompt --help                                       # show all options
 
 ## Features
 
-* File paths are relative resolved from the current working directory.
 * Fenced code blocks optimized for LLM consumption.
+* File paths are resolved relative to the current working directory. This avoids leaking machine-specific paths into LLM prompts.
+* Never modifies your codebase: output is always written to a dedicated .code-to-prompt/ folder in the current working directory, never overwriting source files.
 * Auto-skips noise: binaries, build artifacts, `.git`, `node_modules`, `__pycache__`, etc.
 * Optional token count estimation for LLM context awareness (`--tokens`)
-* Deterministic ordering
-
+* Deterministic ordering: files are sorted by normalized relative paths, guaranteeing stable and reproducible output across runs
 
 ## License
 
