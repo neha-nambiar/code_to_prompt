@@ -5,7 +5,7 @@
 
 Turn a codebase into a single, clean, LLM-ready text prompt.
 
-`code-to-prompt` recursively walks a code folder, filters out noise (build artifacts, dependencies, binaries), and outputs a single text file with paths and fenced code blocks to direct copy-paste into LLM chatbots like ChatGPT, Claude and Gemini.
+`code-to-prompt` recursively walks a code folder, filters out noise (build artifacts, dependencies, binaries), and outputs a single text file with relative paths and fenced code blocks for direct copy-pasting into LLM chatbots like ChatGPT, Claude and Gemini.
 
 Local filesystem processing. No AI or network calls.
 
