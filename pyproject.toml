@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "code-to-prompt-cli"
-version = "0.2.0"
+version = "0.2.1"
 description = "CLI tool to convert code folders into a single text file for LLM prompts"
 readme = "README.md"
 license = { text = "MIT" }
