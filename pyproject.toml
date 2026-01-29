@@ -41,7 +41,7 @@ Repository = "https://github.com/neha-nambiar/code_to_prompt"
 code-to-prompt = "code_to_prompt.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/code_to_prompt"]
+packages = ["code_to_prompt"]
 
 [project.optional-dependencies]
 dev = [
