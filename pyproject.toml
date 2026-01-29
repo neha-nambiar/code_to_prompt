@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "code-to-prompt-cli"
-version = "0.2.2"
+version = "0.2.3"
 description = "CLI tool to convert code folders into a single text file for LLM prompts"
 readme = "README.md"
 license = { text = "MIT" }
@@ -46,12 +46,8 @@ Repository = "https://github.com/neha-nambiar/code_to_prompt"
 code-to-prompt = "code_to_prompt.cli:main"
 
 
-# 🔑 THIS IS THE CRITICAL PART FOR src-layout
-[tool.hatch.build]
-sources = ["src"]
-
 [tool.hatch.build.targets.wheel]
-packages = ["code_to_prompt"]
+packages = ["src/code_to_prompt"]
 
 
 [project.optional-dependencies]
